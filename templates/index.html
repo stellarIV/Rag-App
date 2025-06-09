@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amharic RAG Chatbot</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="chat-container">
+        <h1>የአማርኛ RAG ረዳት</h1>
+
+        <div class="upload-section">
+            <button id="clearDbBtn" class="clear-db-btn">መረጃ ቋት አጽዳ</button> </div>
+
+        <div class="chat-messages" id="chatMessages">
+            <div class="message bot-message">ሰላም! ምን ልረዳዎ እችላለሁ?</div>
+        </div>
+        <div class="chat-input">
+            <input type="text" id="userInput" placeholder="መልእክትዎን እዚህ ያስገቡ...">
+            <button id="sendBtn">ላክ</button>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
