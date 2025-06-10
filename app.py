@@ -61,7 +61,7 @@ gemini_model = genai.GenerativeModel(GENERATIVE_MODEL_NAME)
 
 
 # --- RAG Logic Function (Remains the same) ---
-def generate_rag_answer(query_text: str, n_results: int = 2) -> str:
+def generate_rag_answer(query_text: str, n_results: int = 5) -> str:
     if not collection or not embedder:
         return "Backend services (ChromaDB or Embedder) are not initialized. Cannot generate answer."
 
@@ -110,20 +110,20 @@ def generate_rag_answer(query_text: str, n_results: int = 2) -> str:
         if not context.strip():
             return "ከመረጃ ቋቱ ጋር የሚዛመድ መረጃ አልተገኘም። እባክዎ ጥያቄዎን በሌላ መንገድ ይሞክሩ።"
 
-        # first_prompt = f"""
-        # እርስዎ አጋዥ የ AI ረዳት ነዎት። ከቀረበው የአማርኛ ጽሑፍ ውስጥ ዋና ዋና ነጥቦችን እና ዝርዝሮችን ሳይለቁ ጠቅለል ያለ ማጠቃለያ ይፍጠሩ።
+        first_prompt = f"""
+        እርስዎ አጋዥ የ AI ረዳት ነዎት። ከቀረበው የአማርኛ ጽሑፍ ውስጥ ዋና ዋና ነጥቦችን እና ዝርዝሮችን ሳይለቁ ጠቅለል ያለ ማጠቃለያ ይፍጠሩ።
 
-        # ጽሑፍ:
-        # {context}
-        # """
-        # res_summary_obj = gemini_model.generate_content(first_prompt)
-        # summarized_context = res_summary_obj.text if res_summary_obj and hasattr(res_summary_obj, 'text') else "No summary could be generated from the provided context."
+        ጽሑፍ:
+        {context}
+        """
+        res_summary_obj = gemini_model.generate_content(first_prompt)
+        summarized_context = res_summary_obj.text if res_summary_obj and hasattr(res_summary_obj, 'text') else "No summary could be generated from the provided context."
 
         final_prompt = f"""
         እርስዎ አጋዥ የ AI ረዳት ነዎት። ጥያቄውን ለመመለስ የቀረበውን ጽሑፍ ብቻ ይጠቀሙ።
 
         ጽሑፍ:
-        {context}
+        {summarized_context}
 
         ጥያቄ:
         {query_text}

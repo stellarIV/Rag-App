@@ -2,8 +2,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const userInput = document.getElementById('userInput');
     const sendBtn = document.getElementById('sendBtn');
     const chatMessages = document.getElementById('chatMessages');
-    // const uploadFile = document.getElementById('uploadFile'); // Removed
-    // const uploadBtn = document.getElementById('uploadBtn');   // Removed
     const clearDbBtn = document.getElementById('clearDbBtn');
 
     function appendMessage(sender, message) {
@@ -24,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const typingIndicator = document.createElement('div');
         typingIndicator.classList.add('message', 'bot-message', 'typing-indicator');
-        typingIndicator.textContent = 'ቦት እያሰበ ነው... እባክዎ ይጠብቁ...';
+        typingIndicator.textContent = 'ቦት እያሰበ ነው እባክዎ ይጠብቁ...';
         chatMessages.appendChild(typingIndicator);
         chatMessages.scrollTop = chatMessages.scrollHeight;
 
@@ -53,7 +51,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Removed the async function uploadDocument() { ... }
 
     async function clearDatabase() {
         if (!confirm('መረጃ ቋቱን ሙሉ በሙሉ ማጽዳት ይፈልጋሉ? ይህ ሁሉንም የተከማቸ መረጃ ይሰርዛል።')) {
@@ -88,6 +85,5 @@ document.addEventListener('DOMContentLoaded', function() {
             sendMessage();
         }
     });
-    // Removed: uploadBtn.addEventListener('click', uploadDocument);
     clearDbBtn.addEventListener('click', clearDatabase);
 });
